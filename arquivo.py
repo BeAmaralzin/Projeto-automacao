@@ -2,10 +2,11 @@ import pyautogui
 from time import sleep
 import webbrowser
 import time
+import pandas as pd
+
 
 chrome_path = "C:/Program Files/Google/Chrome/Application/chrome.exe %s"
 webbrowser.get(chrome_path).open("https://web.whatsapp.com/")
-sleep(8)
 
 imagem = r'C:\Users\bamar\Downloads\imagemwpp.jpg'
 
@@ -22,11 +23,15 @@ def aguardar_imagem(caminho_imagem, timeout=30):
             print("Tempo esgotado: O WhatsApp não carregou a tempo.")
             return None
             
-        sleep(1) 
+        sleep(1)
 
-localizacao = aguardar_imagem(imagem)
-if localizacao:
-    pyautogui.click(localizacao)
-else:
-    print("Erro ao carregar.")
+planilha = pd.read_excel(r'C:\Users\bamar\Downloads\planilha 2.xlsx')
+
+for linha in planilha.index:
+    
+    localizacao = aguardar_imagem(imagem)
+    if localizacao:
+        pyautogui.click(localizacao)
+    else:
+        print("Erro ao carregar.")
 
